@@ -3,7 +3,7 @@
 
 This script creates RDB snapshots for each logical database of a Redis open source instance. 
 
-All logical databases in a Redis open source instance are persisted in the same RDB file. Manually creating RDB files for each logical namespace requires a repetitve loading, flushing and restarting process of an intermediate server.
+All logical databases in a Redis open source instance are persisted in the same RDB file. Manually creating RDB files for each logical namespace requires a repetitive process of loading, flushing and restarting an intermediate server.
 
 This script automates this process on an intermediate Redis instance launched as a child process. 
 
@@ -13,7 +13,7 @@ This script automates this process on an intermediate Redis instance launched as
 - Check that your redis-server version is 4.x, 5.x, 6.0.x, or 6.2.x. 
 - Make sure that port 6381 is free. If it is not, then you can use another port by :
   - Updating the $intport variable in the script to the port you want
-  - Updating the "port" directive in the appropriate version of the redis.conf file for the redis-server version you have on your machine
+  - Updating the "port" directive in confs/redis.conf.
 
 ## Usage
 
@@ -25,14 +25,14 @@ OPTIONAL : -a PASSWORD
 HOST, PORT and PASSWORD being the host and the port of your source database. 
 
 If your database has a password, you can :
-- Optionnally pass an -a flag followed by your password, or
+- Pass an -a flag followed by your password, or
 - Edit the $password variable in the script
 
 
 ## Output : 
 
 The script will create 17 files in the "output" folder : 
-- one file per logical database (1.rdb, 2.rdb...)
+- one file per logical database (0.rdb, 1.rdb, 2.rdb...)
 - one source.rdb file, the initial backup of your source database. 
 
 # Troubleshooting :
@@ -42,13 +42,13 @@ The script will create 17 files in the "output" folder :
 - If it is not, then you can :
   - update the $intport variable in the script to the port you want
   - update the "port" directive in the appropriate version of the redis.conf file for the redis-server version you have on your machine
-- Check nohup.out file
+- Check nohup.out file for any errors when launching the background Redis instance
 - Check permissions and password for the default user of your source Redis instance
 - Check that you have passed the correct version of your redis-server installation to the script
 
 
 ## Importing into Redis Enterprise
 
-You can use these files to import your first logical database data to a Redis Enterprise Database. See the different import options here :
+You can use these extracted RDB files to import your logical databases to Redis Enterprise databases. See the different import options here :
 - [Redis Enterprise Software](https://docs.redis.com/latest/rs/databases/import-export/import-data/)
 - [Redis Enterprise Cloud](https://docs.redis.com/latest/rc/databases/import-data/)
