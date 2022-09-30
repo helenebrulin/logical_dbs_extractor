@@ -5,7 +5,7 @@ This script creates RDB snapshots for each logical database of a Redis open sour
 
 All logical databases in a Redis open source instance are persisted in the same RDB file. Manually creating RDB files for each logical namespace requires a repetitive process of loading, flushing and restarting an intermediate server.
 
-This script automates this process on an intermediate Redis instance launched as a child process. 
+This script automates this process using an intermediate Redis instance launched as a child process. 
 
 ## Prerequisites
 
@@ -18,10 +18,9 @@ This script automates this process on an intermediate Redis instance launched as
 ## Usage
 
 ```sh
-./logic.sh -h HOST -p PORT -v REDIS_SERVER_VERSION:6.2/6.0/5/4 
+./logical.sh -h HOST -p PORT -v REDIS_SERVER_VERSION:6.2/6.0/5/4 
 OPTIONAL : -a PASSWORD
 ```
-
 HOST, PORT and PASSWORD being the host and the port of your source database. 
 
 If your database has a password, you can :

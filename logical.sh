@@ -14,7 +14,7 @@ YELLOW="\e[33m"
 GREEN="\e[32m"
 ENDCOLOR="\e[0m"
 
-# kill all processes whose parent is this process upon exit
+#Kill all processes whose parent is this process upon exit
 cleanup() {
     pkill -P $$
 }
@@ -29,7 +29,7 @@ trap cleanup EXIT
 
 #Usage function
 usage() {
-    printf "${RED}Usage: ./logic.sh -h HOST -p PORT -v REDIS_SERVER_VERSION:6.2/6.0/5/4\nOptional : -a PASSWORD${ENDCOLOR}\n" && exit
+    printf "${RED}Usage: ./logical.sh -h HOST -p PORT -v REDIS_SERVER_VERSION:6.2/6.0/5/4\nOptional : -a PASSWORD${ENDCOLOR}\n" && exit
 }
 
 #Parsing inputs
@@ -58,7 +58,7 @@ printf "${YELLOW}Port: $PORT ${ENDCOLOR}\n";
 printf "${YELLOW}Version: $VERSION ${ENDCOLOR}\n";
 printf "${YELLOW}--------${ENDCOLOR}\n";
 
-#intermediary instance function
+#Intermediary instance function
 launch_instance() {
     printf "${YELLOW}Launching intermediary instance on port $intport ${ENDCOLOR}\n";
     nohup $redisserver "./confs/redis$VERSION.conf" > /dev/null 2>&1 &
