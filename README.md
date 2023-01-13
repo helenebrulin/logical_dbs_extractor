@@ -38,7 +38,7 @@ The script will create 17 files in the "output" folder :
 
 # Troubleshooting :
 
-- Check the right path on your machine to run redis-server and/or redis-cli. If necessary, edit the $redis-cli and $redisserver variables at the beginning of the script.
+- Check the right path on your machine to run redis-server and/or redis-cli. If necessary, edit the $rediscli and $redisserver variables at the beginning of the script.
 - Verify port 6381 is available
 - If it is not, then you can :
   - update the $intport variable in the script to the port you want
