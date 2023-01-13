@@ -43,7 +43,7 @@ The script will create 17 files in the "output" folder :
 - If it is not, then you can :
   - update the $intport variable in the script to the port you want
   - update the "port" directive in the appropriate version of the redis.conf file for the redis-server version you have on your machine
-- Check nohup.out file for any errors when launching the background Redis instance
+- Check nohup.out file for any errors which might have happened when launching the background Redis instance
 - Check permissions and password for the default user of your source Redis instance
 - Check that you have passed the correct version of your redis-server installation to the script
 
