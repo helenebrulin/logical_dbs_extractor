@@ -1,7 +1,7 @@
 #! /bin/bash
 
 #Statics
-inthost="127.0.0.01"
+inthost="127.0.0.1"
 intport=6381
 serverPID=0
 password=""
@@ -29,7 +29,7 @@ trap cleanup EXIT
 
 #Usage function
 usage() {
-    printf "${RED}Usage: ./logical.sh -h HOST -p PORT -v REDIS_SERVER_VERSION:6.2/6.0/5/4\nOptional : -a PASSWORD${ENDCOLOR}\n" && exit
+    printf "${RED}Usage: ./logical.sh -h HOST -p PORT -v 6.2\nOptional : -a REDIS_PASSWORD${ENDCOLOR}\n" && exit
 }
 
 #Parsing inputs
@@ -78,15 +78,18 @@ launch_instance() {
 printf "${YELLOW}Connecting to Source database...${ENDCOLOR}\n";
 if $rediscli -u "redis://default:$password@$HOST:$PORT" PING 2>/dev/null | grep -q 'PONG';
     then
-        printf "${GREEN}Connected. Creating source snapshot...\n"
+        printf "${GREEN}Connected. Creating source snapshot...${ENDCOLOR}\n"
         printf "${YELLOW}--------${ENDCOLOR}\n";
     else
         printf "${RED}Error - Could not connect to source database. Check your redis-cli path and your default password.${ENDCOLOR}\n"
         exit
 fi
 
-#Creating output folder
+#Creating and cleaning output folder
 mkdir -p output
+rm output/*
+printf "${GREEN}Created and cleaned output folder${ENDCOLOR}\n";
+printf "${YELLOW}--------${ENDCOLOR}\n";
 
 #Saving initial config
 dbfilename=`"$rediscli" -u "redis://default:$password@$HOST:$PORT" CONFIG GET dbfilename 2>/dev/null`
@@ -126,5 +129,5 @@ while [[ $i -lt 16 ]]
         printf "${YELLOW}--------${ENDCOLOR}\n";
     done
 
-printf "${GREEN}Finished${ENDCOLOR}\n";    
+printf "${GREEN}Finished. You can find your rdb files in the output folder.${ENDCOLOR}\n";    
 

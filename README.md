@@ -1,5 +1,5 @@
 
-# Open Source Logical Databases Extractor
+# Redis Open Source Logical Databases Extractor
 
 This script creates RDB snapshots for each logical database of a Redis open source instance. 
 
@@ -14,16 +14,18 @@ This script automates this process using an intermediate Redis instance launched
 - Make sure that port 6381 is free. If it is not, then you can use another port by :
   - Updating the $intport variable in the script to the port you want
   - Updating the "port" directive in confs/redis.conf.
+- This script assumes that you have a Redis database with the default number of 16 logical databases in its configuration file.
 
 ## Usage
 
 ```sh
-./logical.sh -h HOST -p PORT -v REDIS_SERVER_VERSION:6.2/6.0/5/4 
-OPTIONAL : -a PASSWORD
+./logical.sh -h HOST -p PORT -v 6.2
+OPTIONAL : -a REDIS_PASSWORD
 ```
-HOST, PORT and PASSWORD being the host and the port of your source database. 
+HOST, PORT being the host and the port of your source database.
+The Redis version can be 6.2, 6.0, 5, or 4.
 
-If your database has a password, you can :
+If your source database has a password, you can :
 - Pass an -a flag followed by your password, or
 - Edit the $password variable in the script
 
